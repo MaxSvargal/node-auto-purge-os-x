@@ -2,7 +2,7 @@ var os = require('os'),
     exec = require('child_process').exec;
 
 var intervalSec = 60,
-    memLimitMb = 300;
+    memLimitMb = 200;
 
 (function() {
   var calculate = function() {
