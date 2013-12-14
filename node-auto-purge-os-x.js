@@ -18,9 +18,9 @@ var intervalSec = 60,
     return [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
   };
 
-  var execPurge = function() {
+  var execPurge = function(preFreeMem) {
     exec('purge', function(err, stdout, stderr) {
-      log("\x1B[33mPurged from " + getFreeMem() + " Mb\x1B[39m");
+      log("\x1B[33mPurged " + (getFreeMem() - preFreeMem) + " Mb\x1B[39m");
     });
   };
 
@@ -28,14 +28,14 @@ var intervalSec = 60,
     var freeMem = getFreeMem();
     if (freeMem <= memLimitMb) {
       log("\x1B[32mLow memory (" + freeMem + " Mb). Start purge command...\x1B[39m");
-      execPurge();
+      execPurge(freeMem);
     } else {
-      log("Free memory is \x1B[1m" + freeMem + " Mb\x1B[22m");
+      log("\x1B[1m" + freeMem + " Mb\x1B[22m free.");
     }
   };
 
-  log("\x1B[36mScript started with a limit " + memLimitMb + " Mb of memory for purge and with check interval " + intervalSec + " seconds.\x1B[39m");
+  log("\x1B[36mScript started with a limit " + memLimitMb + "Mb of memory for purge and with check interval " + intervalSec + " seconds.\x1B[39m");
   setInterval(calculate, intervalSec * 1000);
   calculate();
-  
+
 })()
