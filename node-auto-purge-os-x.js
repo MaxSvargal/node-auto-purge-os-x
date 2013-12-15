@@ -14,6 +14,7 @@ var AddConsoleStyles = (function() {
     'cyan'  : ['\x1B[36m', '\x1B[39m'],
     'green' : ['\x1B[32m', '\x1B[39m'],
     'yellow': ['\x1B[33m', '\x1B[39m'],
+    'grey'  : ['\x1B[90m', '\x1B[39m'],
     'bold'  : ['\x1B[1m', '\x1B[22m']
   };
   for(style in styles) {
@@ -23,7 +24,7 @@ var AddConsoleStyles = (function() {
 
 (function() {
   var log = function(str) {
-    return console.log( '\x1B[90m[' + getTime() + ']\x1B[39m ' + str);
+    return console.log(('[' + getTime() + '] ').grey + str);
   };
 
   var getFreeMem = function() {
