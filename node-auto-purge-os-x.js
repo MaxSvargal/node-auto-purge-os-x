@@ -36,17 +36,17 @@ var AddConsoleStyles = (function() {
     return [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
   };
 
-  var execPurge = function(preFreeMem) {
-    exec('purge', function(err, stdout, stderr) {
-      log(("Purged " + (getFreeMem() - preFreeMem) + " Mb").yellow);
-    });
+  var execPurge = function(callback) {
+    exec('purge', callback);
   };
 
   var calculate = function() {
     var freeMem = getFreeMem();
     if (freeMem <= memLimitMb) {
       log(("Low memory (" + freeMem + " Mb). Start purge command...\x1B[39m").green);
-      execPurge(freeMem);
+      execPurge(function(){
+        log(("Purged " + (getFreeMem() - freeMem) + " Mb").yellow);
+      });
     } else {
       log(freeMem.toString().bold + " Mb free.");
     }
