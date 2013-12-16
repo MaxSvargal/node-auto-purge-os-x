@@ -11,11 +11,12 @@ var AddConsoleStyles = (function() {
     });
   };
   var styles = {
-    'cyan'  : ['\x1B[36m', '\x1B[39m'],
-    'green' : ['\x1B[32m', '\x1B[39m'],
-    'yellow': ['\x1B[33m', '\x1B[39m'],
-    'grey'  : ['\x1B[90m', '\x1B[39m'],
-    'bold'  : ['\x1B[1m', '\x1B[22m']
+    'cyan'      : ['\x1B[36m', '\x1B[39m'],
+    'green'     : ['\x1B[32m', '\x1B[39m'],
+    'yellow'    : ['\x1B[33m', '\x1B[39m'],
+    'grey'      : ['\x1B[90m', '\x1B[39m'],
+    'magenta'   : ['\x1B[35m', '\x1B[39m'],
+    'bold'      : ['\x1B[1m', '\x1B[22m']
   };
   for(style in styles) {
     addProperty(style, styles[style][0], styles[style][1]);
@@ -24,7 +25,7 @@ var AddConsoleStyles = (function() {
 
 (function() {
   var log = function(str) {
-    return console.log(('[' + getTime() + '] ').grey + str);
+    return console.log('[' + getTime() + '] ' + str.magenta);
   };
 
   var getFreeMem = function() {
